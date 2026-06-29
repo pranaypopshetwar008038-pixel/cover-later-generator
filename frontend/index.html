@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Generate professional cover letters instantly. Enter your details and get a polished, job-ready cover letter in seconds." />
+  <title>Cover Letter Generator — Create Professional Cover Letters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background particles -->
+  <div class="bg-particles" id="bgParticles"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">✉️</span>
+        <h1>CoverCraft</h1>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-btn" id="btnHistory" title="Saved Letters">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+          <span>History</span>
+          <span class="badge" id="historyBadge">0</span>
+        </button>
+        <button class="nav-btn theme-toggle" id="btnTheme" title="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">⚡ AI-Powered & Template-Based</span>
+      <h2>Create Perfect Cover Letters <br /><span class="gradient-text">In Seconds</span></h2>
+      <p>Enter your details, click Generate, and get a professional cover letter ready to impress any employer.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <!-- Input Form -->
+    <section class="card form-card" id="formCard">
+      <div class="card-header">
+        <h3>📝 Your Details</h3>
+        <p>Choose your input method below and fill in the required details.</p>
+      </div>
+
+      <!-- Mode Toggle Tabs -->
+      <div class="mode-tabs">
+        <button class="mode-tab active" id="tabManual" data-mode="manual">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Manual Input
+        </button>
+        <button class="mode-tab" id="tabResume" data-mode="resume">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Resume Upload
+        </button>
+      </div>
+
+      <form id="coverLetterForm" novalidate>
+        <!-- ═══ MANUAL INPUT MODE ═══ -->
+        <div id="manualMode">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name <span class="required">*</span></label>
+              <input type="text" id="fullName" placeholder="e.g., Rahul Sharma" required />
+              <span class="error-msg" id="errFullName"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="jobTitle">Job Title <span class="required">*</span></label>
+              <input type="text" id="jobTitle" placeholder="e.g., Software Engineer" required />
+              <span class="error-msg" id="errJobTitle"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="companyName">Company Name <span class="required">*</span></label>
+              <input type="text" id="companyName" placeholder="e.g., Google" required />
+              <span class="error-msg" id="errCompanyName"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="skills">Skills <span class="required">*</span></label>
+              <input type="text" id="skills" placeholder="e.g., JavaScript, React, Node.js, Python" required />
+              <span class="error-msg" id="errSkills"></span>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="jobDescription">Job Description <span class="required">*</span></label>
+              <textarea id="jobDescription" rows="4" placeholder="Paste the job description here..." required></textarea>
+              <span class="error-msg" id="errJobDescription"></span>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="experience">Experience <span class="optional">(Optional)</span></label>
+              <textarea id="experience" rows="3" placeholder="e.g., 3 years of full-stack development at XYZ Corp..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ RESUME UPLOAD MODE ═══ -->
+        <div id="resumeMode" class="hidden">
+          <!-- Drag & Drop Upload Zone -->
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-zone-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <p class="upload-zone-text">
+              <strong>Drag & drop your resume here</strong><br/>
+              <span>or click to browse files</span>
+            </p>
+            <p class="upload-zone-hint">Supports PDF and DOCX • Max 5 MB</p>
+            <input type="file" id="resumeFileInput" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden />
+          </div>
+
+          <!-- Upload Progress Bar -->
+          <div class="upload-progress hidden" id="uploadProgress">
+            <div class="upload-progress-bar" id="uploadProgressBar"></div>
+          </div>
+
+          <!-- File Info (shown after file is selected) -->
+          <div class="file-info hidden" id="fileInfo">
+            <div class="file-info-icon">📄</div>
+            <div class="file-info-details">
+              <span class="file-info-name" id="fileName">resume.pdf</span>
+              <span class="file-info-size" id="fileSize">245 KB</span>
+            </div>
+            <button type="button" class="btn btn-icon file-remove-btn" id="btnRemoveFile" title="Remove file">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <span class="error-msg" id="errResume"></span>
+
+          <!-- Job Details for Resume Mode -->
+          <div class="form-grid" style="margin-top: 1rem;">
+            <div class="form-group">
+              <label for="resumeJobTitle">Job Title <span class="required">*</span></label>
+              <input type="text" id="resumeJobTitle" placeholder="e.g., Software Engineer" />
+              <span class="error-msg" id="errResumeJobTitle"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="resumeCompanyName">Company Name <span class="required">*</span></label>
+              <input type="text" id="resumeCompanyName" placeholder="e.g., Google" />
+              <span class="error-msg" id="errResumeCompanyName"></span>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="resumeJobDescription">Job Description <span class="required">*</span></label>
+              <textarea id="resumeJobDescription" rows="4" placeholder="Paste the job description here..."></textarea>
+              <span class="error-msg" id="errResumeJobDescription"></span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-generate" id="btnGenerate">
+          <span class="btn-text">✨ Generate Cover Letter</span>
+          <span class="btn-loader" id="btnLoader">
+            <svg class="spinner" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+            Generating...
+          </span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Output Section -->
+    <section class="card output-card hidden" id="outputCard">
+      <div class="card-header">
+        <h3>📄 Your Cover Letter</h3>
+        <div class="output-actions">
+          <button class="btn btn-icon" id="btnCopy" title="Copy to Clipboard">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+          <button class="btn btn-icon" id="btnDownloadTxt" title="Download as .txt">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>.txt</span>
+          </button>
+          <button class="btn btn-icon" id="btnDownloadPdf" title="Download as .pdf">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>.pdf</span>
+          </button>
+        </div>
+      </div>
+      <div class="output-body" id="outputBody">
+        <pre id="coverLetterOutput"></pre>
+      </div>
+    </section>
+
+    <!-- History Sidebar -->
+    <div class="history-overlay hidden" id="historyOverlay"></div>
+    <aside class="history-panel hidden" id="historyPanel">
+      <div class="history-header">
+        <h3>📚 Saved Letters</h3>
+        <button class="btn btn-icon btn-close" id="btnCloseHistory">✕</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <p class="history-empty">No saved letters yet.</p>
+      </div>
+      <button class="btn btn-danger" id="btnClearHistory">🗑️ Clear All</button>
+    </aside>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Built with ❤️ — CoverCraft Cover Letter Generator</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
