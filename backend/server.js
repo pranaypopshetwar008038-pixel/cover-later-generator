@@ -33,7 +33,9 @@ app.use(express.json());
 
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
-
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
+});
 // ─── Health check ────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
   const mode = process.env.GENERATION_MODE || 'template';
