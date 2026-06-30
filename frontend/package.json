@@ -1,0 +1,15 @@
+{
+  "name": "cover-letter-generator-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Cover Letter Generator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["cover-letter", "generator"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}
