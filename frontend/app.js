@@ -3,7 +3,7 @@
    v2.0 — Now with Resume Upload & Gemini AI
    ═══════════════════════════════════════════════════════════════════════════ */
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = '/api';
 const STORAGE_KEY = 'covercraft_history';
 
 // ─── Current Mode ────────────────────────────────────────────────────────────
